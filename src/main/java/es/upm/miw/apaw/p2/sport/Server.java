@@ -6,7 +6,7 @@ import es.upm.miw.apaw.p2.sport.http.HttpResponse;
 public class Server {
 	private Dispatcher dispatcher = new Dispatcher();
 
-	/*public HttpResponse request(HttpRequest request) {
+	public HttpResponse request(HttpRequest request) {
 		HttpResponse response = new HttpResponse();
 		switch (request.getMethod()) {
 		case POST:
@@ -24,6 +24,6 @@ public class Server {
 		default:
 		}
 		return response;
-	}*/
+	}
 
 }
