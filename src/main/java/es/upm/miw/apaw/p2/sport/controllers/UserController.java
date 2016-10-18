@@ -13,7 +13,7 @@ public class UserController {
 		List<User> usersList = DaoFactory.getFactory().getUserDao().findAll();
 		UsersListWrapper usersListWrapper = new UsersListWrapper();
 		for (User user : usersList) {
-			usersListWrapper.addUserWrapper(new UserWrapper(user.getId(), user.getNick(), user.getEmail()));
+			usersListWrapper.addUserWrapper(new UserWrapper(user.getId(), user.getNick(), user.getEmail(), user.getSports()));
 		}
 		return usersListWrapper;
 	}

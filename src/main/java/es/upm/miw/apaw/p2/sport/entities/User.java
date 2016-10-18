@@ -46,4 +46,8 @@ public class User {
 		this.sports.add(sportId);
 	}
 	
+	public ArrayList<Integer> getSports() {
+		return this.sports;
+	}
+	
 }

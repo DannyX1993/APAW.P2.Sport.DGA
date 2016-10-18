@@ -1,5 +1,7 @@
 package es.upm.miw.apaw.p2.sport.wrappers;
 
+import java.util.ArrayList;
+
 public class UserWrapper {
 
 	private int id;
@@ -8,10 +10,13 @@ public class UserWrapper {
 	
 	private String email;
 	
-	public UserWrapper(int id, String nick, String email) {
+	private ArrayList<Integer> sportsList;
+	
+	public UserWrapper(int id, String nick, String email, ArrayList<Integer> sportsList) {
 		this.id = id;
 		this.nick = nick;
 		this.email = email;
+		this.sportsList = sportsList;
 	}
 	
 	public void setId(int id) {
@@ -40,7 +45,8 @@ public class UserWrapper {
 	
 	@Override
 	public String toString() {
-		return "{\"id\":" + id + ",\"nick\":\"" + nick + ",\"email\":\"" + email +"\"}";
+		return "{\"id\":" + id + ",\"nick\":\"" + nick + ",\"email\":\"" + email +
+				"\",\"sports\":" + sportsList + "}";
 	}
 	
 }

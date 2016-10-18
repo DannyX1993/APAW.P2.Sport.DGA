@@ -58,10 +58,6 @@ public class ApiArchitectureMain {
 		request.setBody("daniel:daniel.glez1993@gmail.com");
 		this.request();
 		
-		request.setMethod(HttpMethod.GET);
-		request.setPath("users");
-		this.request();
-		
 		request.setMethod(HttpMethod.POST);
 		request.setPath("users/daniel/sport");
 		request.setBody("");
@@ -75,6 +71,15 @@ public class ApiArchitectureMain {
 		request.setMethod(HttpMethod.POST);
 		request.setPath("users/daniel/sport");
 		request.setBody("Futbol");
+		this.request();
+		
+		request.setMethod(HttpMethod.POST);
+		request.setPath("users/daniel/sport");
+		request.setBody("Baloncesto");
+		this.request();
+		
+		request.setMethod(HttpMethod.GET);
+		request.setPath("users");
 		this.request();
 		
 	}
