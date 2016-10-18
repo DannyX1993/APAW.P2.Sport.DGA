@@ -1,7 +1,9 @@
 package es.upm.miw.apaw.p2.sport;
 
+import es.upm.miw.apaw.p2.sport.api.SportResource;
 import es.upm.miw.apaw.p2.sport.api.UserResource;
 import es.upm.miw.apaw.p2.sport.exceptions.InvalidRequestException;
+import es.upm.miw.apaw.p2.sport.exceptions.InvalidUserFieldException;
 import es.upm.miw.apaw.p2.sport.http.HttpRequest;
 import es.upm.miw.apaw.p2.sport.http.HttpResponse;
 import es.upm.miw.apaw.p2.sport.http.HttpStatus;
@@ -9,6 +11,8 @@ import es.upm.miw.apaw.p2.sport.http.HttpStatus;
 public class Dispatcher {
 
 	private UserResource userResource = new UserResource();
+	
+	private SportResource sportResource = new SportResource();
 
 	private void responseError(HttpResponse response, Exception e) {
 		response.setBody("{\"error\":\"" + e + "\"}");
@@ -28,13 +32,17 @@ public class Dispatcher {
 		if("users".equals(request.getPath())) {
 			// POST **/users body="nick:email"
 			this.createUser(request, response);
-			response.setStatus(HttpStatus.CREATED);
 		} else if ("users".equals(request.paths()[0]) && "sport".equals(request.paths()[2])) {
-			// POST **/users/{nick}/sport
-			userResource.addSportToUser(request.paths()[1]);
-			response.setStatus(HttpStatus.CREATED);
-		} else if("sport".equals(request.getPath())) {
+			try {
+				// POST **/users/{nick}/sport
+				userResource.addSport(request.paths()[1], request.getBody());
+				response.setStatus(HttpStatus.CREATED);
+			} catch (Exception e) {
+				responseError(response, e);
+			}
+		} else if("sports".equals(request.getPath())) {
 			// POST **/sports body="name"
+			this.createSport(request, response);
 		} else {
 			responseError(response, new InvalidRequestException(request.getPath()));
 		}
@@ -46,6 +54,16 @@ public class Dispatcher {
 			String nick = request.getBody().split(":")[0];
 			String email = request.getBody().split(":")[1];
 			userResource.createUser(nick, email);
+			response.setStatus(HttpStatus.CREATED);
+		} catch (Exception e) {
+			responseError(response, e);
+		}
+	}
+	
+	private void createSport(HttpRequest request, HttpResponse response) {
+		try {
+			sportResource.createSport(request.getBody());
+			response.setStatus(HttpStatus.CREATED);
 		} catch (Exception e) {
 			responseError(response, e);
 		}

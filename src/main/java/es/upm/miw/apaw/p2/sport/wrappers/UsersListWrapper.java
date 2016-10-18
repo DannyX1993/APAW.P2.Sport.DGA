@@ -12,7 +12,7 @@ public class UsersListWrapper {
 		usersList = new ArrayList<>();
 	}
 
-	public List<UserWrapper> getThemeList() {
+	public List<UserWrapper> getUsersList() {
 		return usersList;
 	}
 

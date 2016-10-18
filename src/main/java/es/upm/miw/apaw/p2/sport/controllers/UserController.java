@@ -22,8 +22,13 @@ public class UserController {
 		DaoFactory.getFactory().getUserDao().create(new User(nick, email));
 	}
 	
-	public void addSportToUser(String sportName) {
-		//DaoFactory.getFactory().getUserDao().findByNick(nick).addSport(sportName);
+	public void addSport(String nick, Integer sportId) {
+		DaoFactory.getFactory().getUserDao().findByNick(nick).addSport(sportId);
+	}
+
+	public boolean checkIfExistNick(String nick) {
+		User user = DaoFactory.getFactory().getUserDao().findByNick(nick);
+		return (user == null) ? false : true;
 	}
 	
 }

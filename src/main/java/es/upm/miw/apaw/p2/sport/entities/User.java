@@ -10,12 +10,12 @@ public class User {
 	
 	private String email;
 	
-	private ArrayList<Sport> sports;
+	private ArrayList<Integer> sports;
 	
 	public User(String nick, String email) {
 		this.nick = nick;
 		this.email = email;
-		this.sports = new ArrayList<Sport>();
+		this.sports = new ArrayList<Integer>();
 	}
 	
 	public Integer getId() {
@@ -42,8 +42,8 @@ public class User {
 		this.email = email;
 	}
 	
-	public void addSport(Sport sport) {
-		this.sports.add(sport);
+	public void addSport(Integer sportId) {
+		this.sports.add(sportId);
 	}
 	
 }

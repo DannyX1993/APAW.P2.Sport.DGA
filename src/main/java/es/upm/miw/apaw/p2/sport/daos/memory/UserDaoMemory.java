@@ -1,5 +1,6 @@
 package es.upm.miw.apaw.p2.sport.daos.memory;
 
+import java.util.List;
 import java.util.HashMap;
 
 import es.upm.miw.apaw.p2.sport.daos.UserDao;
@@ -20,6 +21,18 @@ public class UserDaoMemory extends GenericMemoryDao<User> implements UserDao {
 	@Override
 	protected void setId(User entity, Integer ID) {
 		entity.setId(ID);
+	}
+
+	@Override
+	public User findByNick(String nick) {
+		List<User> usersList = this.findAll();
+		for(User user : usersList) {
+			if(user.getNick().equals(nick)) {
+				return user;
+			}
+		}
+		
+		return null;
 	}
 
 }

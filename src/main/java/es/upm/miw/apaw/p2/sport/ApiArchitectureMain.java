@@ -24,6 +24,26 @@ public class ApiArchitectureMain {
 	
 	public void demo() {
 		request.setMethod(HttpMethod.POST);
+		request.setPath("sports");
+		request.setBody("");
+		this.request();
+		
+		request.setMethod(HttpMethod.POST);
+		request.setPath("sports");
+		request.setBody("Futbol");
+		this.request();
+		
+		request.setMethod(HttpMethod.POST);
+		request.setPath("sports");
+		request.setBody("Baloncesto");
+		this.request();
+		
+		request.setMethod(HttpMethod.POST);
+		request.setPath("sports");
+		request.setBody("Futbol");
+		this.request();
+		
+		request.setMethod(HttpMethod.POST);
 		request.setPath("users");
 		request.setBody("daniel:daniel.glez1993@gmail.com");
 		this.request();
@@ -33,9 +53,30 @@ public class ApiArchitectureMain {
 		request.setBody("andres:andres@gmail.com");
 		this.request();
 		
+		request.setMethod(HttpMethod.POST);
+		request.setPath("users");
+		request.setBody("daniel:daniel.glez1993@gmail.com");
+		this.request();
+		
 		request.setMethod(HttpMethod.GET);
 		request.setPath("users");
 		this.request();
+		
+		request.setMethod(HttpMethod.POST);
+		request.setPath("users/daniel/sport");
+		request.setBody("");
+		this.request();
+		
+		request.setMethod(HttpMethod.POST);
+		request.setPath("users/daniel/sport");
+		request.setBody("asdasd");
+		this.request();
+		
+		request.setMethod(HttpMethod.POST);
+		request.setPath("users/daniel/sport");
+		request.setBody("Futbol");
+		this.request();
+		
 	}
 	
 	public void request() {
