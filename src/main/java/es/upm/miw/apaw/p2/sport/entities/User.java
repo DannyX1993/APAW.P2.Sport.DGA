@@ -49,5 +49,14 @@ public class User {
 	public ArrayList<Integer> getSports() {
 		return this.sports;
 	}
+
+	public boolean haveSport(Integer sportId) {
+		for(Integer id : sports) {
+			if(id == sportId) {
+				return true;
+			}
+		}
+		return false;
+	}
 	
 }

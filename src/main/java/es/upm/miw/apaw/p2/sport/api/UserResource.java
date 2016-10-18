@@ -27,9 +27,7 @@ public class UserResource {
 	public void addSport(String nick, String sportName) throws InvalidSportFieldException {
 		validateFieldUserSport(sportName);
 		SportController sportController = new SportController();
-		if(!sportController.checkIfExistSportByName(sportName)) {
-			throw new InvalidSportFieldException();
-		}
+		checkIfHaveSport(sportName);
 		new UserController().addSport(nick, sportController.getIdByName(sportName));
 	}
 	
@@ -47,5 +45,16 @@ public class UserResource {
 	
 	private boolean validateField(String field) {
 		return field == null || field.isEmpty();
+	}
+	
+	private void checkIfHaveSport(String sportName) throws InvalidSportFieldException {
+		if(!new SportController().checkIfExistSportByName(sportName)) {
+			throw new InvalidSportFieldException();
+		}
+	}
+
+	public UsersListWrapper getUsersListBySport(String sportName) throws InvalidSportFieldException {
+		checkIfHaveSport(sportName);
+		return new UserController().getUsersListBySport(sportName);
 	}
 }

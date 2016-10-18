@@ -30,5 +30,15 @@ public class UserController {
 		User user = DaoFactory.getFactory().getUserDao().findByNick(nick);
 		return (user == null) ? false : true;
 	}
+
+	public UsersListWrapper getUsersListBySport(String sportName) {
+		Integer sportId = DaoFactory.getFactory().getSportDao().findByName(sportName).getId();
+		List<User> usersList = DaoFactory.getFactory().getUserDao().findBySport(sportId);
+		UsersListWrapper usersListWrapper = new UsersListWrapper();
+		for(User user : usersList) {
+			usersListWrapper.addUserWrapper(new UserWrapper(user.getId(), user.getNick(), user.getEmail(), user.getSports()));
+		}
+		return usersListWrapper;
+	}
 	
 }

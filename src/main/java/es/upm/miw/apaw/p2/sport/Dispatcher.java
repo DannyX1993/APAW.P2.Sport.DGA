@@ -3,7 +3,7 @@ package es.upm.miw.apaw.p2.sport;
 import es.upm.miw.apaw.p2.sport.api.SportResource;
 import es.upm.miw.apaw.p2.sport.api.UserResource;
 import es.upm.miw.apaw.p2.sport.exceptions.InvalidRequestException;
-import es.upm.miw.apaw.p2.sport.exceptions.InvalidUserFieldException;
+import es.upm.miw.apaw.p2.sport.exceptions.InvalidSportFieldException;
 import es.upm.miw.apaw.p2.sport.http.HttpRequest;
 import es.upm.miw.apaw.p2.sport.http.HttpResponse;
 import es.upm.miw.apaw.p2.sport.http.HttpStatus;
@@ -23,8 +23,13 @@ public class Dispatcher {
 		if ("users".equals(request.getPath())) {
 			// GET **/users
 			response.setBody(userResource.usersList().toString());
-		} else if ("users".equals(request.paths()[0]) && "sport".equals(request.paths()[2])) {
+		} else if ("users".equals(request.paths()[0]) && request.getParams().containsKey("sport")) {
 			// GET **/users/search?sport=*
+			try {
+				response.setBody(userResource.getUsersListBySport(request.getParams().get("sport")).toString());
+			} catch (InvalidSportFieldException e) {
+				responseError(response, e);
+			}
 		}
 	}
 

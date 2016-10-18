@@ -82,6 +82,18 @@ public class ApiArchitectureMain {
 		request.setPath("users");
 		this.request();
 		
+		request.setMethod(HttpMethod.GET);
+		request.setPath("users/search");
+		request.setBody("");
+		request.addQueryParam("sport", "Futbol");
+		this.request();
+		
+		request.setMethod(HttpMethod.GET);
+		request.setPath("users/search");
+		request.setBody("");
+		request.addQueryParam("sport", "asd");
+		this.request();
+		
 	}
 	
 	public void request() {
