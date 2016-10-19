@@ -24,12 +24,14 @@ public class Dispatcher {
 			// GET **/users
 			response.setBody(userResource.usersList().toString());
 		} else if ("users".equals(request.paths()[0]) && request.getParams().containsKey("sport")) {
-			// GET **/users/search?sport=*
 			try {
+				// GET **/users/search?sport=*
 				response.setBody(userResource.getUsersListBySport(request.getParams().get("sport")).toString());
 			} catch (InvalidSportFieldException e) {
 				responseError(response, e);
 			}
+		} else {
+			responseError(response, new InvalidRequestException(request.getPath()));
 		}
 	}
 
@@ -37,14 +39,6 @@ public class Dispatcher {
 		if("users".equals(request.getPath())) {
 			// POST **/users body="nick:email"
 			this.createUser(request, response);
-		} else if ("users".equals(request.paths()[0]) && "sport".equals(request.paths()[2])) {
-			try {
-				// POST **/users/{nick}/sport
-				userResource.addSport(request.paths()[1], request.getBody());
-				response.setStatus(HttpStatus.CREATED);
-			} catch (Exception e) {
-				responseError(response, e);
-			}
 		} else if("sports".equals(request.getPath())) {
 			// POST **/sports body="name"
 			this.createSport(request, response);
@@ -75,20 +69,24 @@ public class Dispatcher {
 	}
 
 	public void doPut(HttpRequest request, HttpResponse response) {
-		switch (request.getPath()) {
-			case "users":
-				break;
-			default:
-				responseError(response, new InvalidRequestException(request.getPath()));
-				break;
+		if ("users".equals(request.paths()[0]) && "sport".equals(request.paths()[2])) {
+			try {
+				// PUT **/users/{nick}/sport
+				userResource.addSport(request.paths()[1], request.getBody());
+				response.setStatus(HttpStatus.CREATED);
+			} catch (Exception e) {
+				responseError(response, e);
+			}
+		} else {
+			responseError(response, new InvalidRequestException(request.getPath()));
 		}
 	}
 
 	public void doDelete(HttpRequest request, HttpResponse response) {
 		switch (request.getPath()) {
-		default:
-			responseError(response, new InvalidRequestException(request.getPath()));
-			break;
+			default:
+				responseError(response, new InvalidRequestException(request.getPath()));
+				break;
 		}
 	}
 

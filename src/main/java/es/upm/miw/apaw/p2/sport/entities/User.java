@@ -59,7 +59,7 @@ public class User {
 		return null;
 	}
 
-	public boolean haveSport(Sport sport) {
+	public boolean hasSport(Sport sport) {
 		for(Sport currentSport : sports) {
 			if(currentSport.equals(sport)) {
 				return true;

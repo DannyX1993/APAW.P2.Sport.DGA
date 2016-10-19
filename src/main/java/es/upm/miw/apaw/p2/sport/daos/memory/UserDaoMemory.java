@@ -41,7 +41,7 @@ public class UserDaoMemory extends GenericMemoryDao<User> implements UserDao {
 		List<User> usersList = this.findAll();
 		List<User> filteredUsers = new ArrayList<User>();
 		for(User user : usersList) {
-			if(user.haveSport(user.getSportById(sportId))) {
+			if(user.hasSport(user.getSportById(sportId))) {
 				filteredUsers.add(user);
 			}
 		}
