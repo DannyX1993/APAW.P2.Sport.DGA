@@ -10,12 +10,12 @@ public class User {
 	
 	private String email;
 	
-	private ArrayList<Integer> sports;
+	private ArrayList<Sport> sports;
 	
 	public User(String nick, String email) {
 		this.nick = nick;
 		this.email = email;
-		this.sports = new ArrayList<Integer>();
+		this.sports = new ArrayList<Sport>();
 	}
 	
 	public Integer getId() {
@@ -42,21 +42,38 @@ public class User {
 		this.email = email;
 	}
 	
-	public void addSport(Integer sportId) {
-		this.sports.add(sportId);
+	public void addSport(Sport sport) {
+		this.sports.add(sport);
 	}
 	
-	public ArrayList<Integer> getSports() {
+	public ArrayList<Sport> getSports() {
 		return this.sports;
 	}
+	
+	public Sport getSportById(Integer sportId) {
+		for(Sport sport : sports) {
+			if(sport.getId() == sportId) {
+				return sport;
+			}
+		}
+		return null;
+	}
 
-	public boolean haveSport(Integer sportId) {
-		for(Integer id : sports) {
-			if(id == sportId) {
+	public boolean haveSport(Sport sport) {
+		for(Sport currentSport : sports) {
+			if(currentSport.equals(sport)) {
 				return true;
 			}
 		}
 		return false;
+	}
+
+	public ArrayList<String> getStringSportsList() {
+		ArrayList<String> sportsList = new ArrayList<String>(sports.size());
+		for(Sport sport : sports) {
+			sportsList.add(sport.getName());
+		}
+		return sportsList;
 	}
 	
 }

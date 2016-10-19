@@ -94,6 +94,12 @@ public class ApiArchitectureMain {
 		request.addQueryParam("sport", "asd");
 		this.request();
 		
+		request.setMethod(HttpMethod.GET);
+		request.setPath("users/search");
+		request.setBody("");
+		request.addQueryParam("sport", "");
+		this.request();
+		
 	}
 	
 	public void request() {

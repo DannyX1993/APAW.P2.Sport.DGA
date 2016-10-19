@@ -26,4 +26,13 @@ public class Sport {
 		return name;
 	}
 	
+	@Override
+	public boolean equals(Object object) {
+		Sport sport = (Sport) object;
+		if(ID == sport.getId() && name.equals(sport.getName())){
+			return true;
+		}
+		return false;
+	}
+	
 }

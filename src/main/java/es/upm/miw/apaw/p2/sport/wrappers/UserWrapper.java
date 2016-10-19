@@ -10,13 +10,13 @@ public class UserWrapper {
 	
 	private String email;
 	
-	private ArrayList<Integer> sportsList;
+	private SportsListsUserWrapper sportListWrapper;
 	
-	public UserWrapper(int id, String nick, String email, ArrayList<Integer> sportsList) {
+	public UserWrapper(int id, String nick, String email, ArrayList<String> sportsList) {
 		this.id = id;
 		this.nick = nick;
 		this.email = email;
-		this.sportsList = sportsList;
+		this.sportListWrapper = new SportsListsUserWrapper(sportsList);
 	}
 	
 	public void setId(int id) {
@@ -46,7 +46,7 @@ public class UserWrapper {
 	@Override
 	public String toString() {
 		return "{\"id\":" + id + ",\"nick\":\"" + nick + ",\"email\":\"" + email +
-				"\",\"sports\":" + sportsList + "}";
+				"\",\"sports\":" + this.sportListWrapper.toString() + "}";
 	}
 	
 }
